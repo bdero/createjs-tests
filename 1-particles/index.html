@@ -22,16 +22,24 @@
         var part = new createjs.Shape();
         part.graphics
           .beginFill(c( Math.floor(Math.random()*0xFFFFFF) ))
-          .drawCircle(0, 0, 50);
-        part.x = part.y = 100;
+          .drawCircle(0, 0, Math.random()*30 + 10);
+        part.x = Math.random()*stage.canvas.width;
+        part.y = -50;
         stage.addChild(part);
 
-        createjs.Ticker.setFPS(60);
-        createjs.Ticker.addEventListener("tick", stage);
-
+        var duration = Math.random()*900 + 100;
         createjs.Tween.get(part, { loop:true })
-          .to({ x: 400}, 1000, createjs.Ease.getPowInOut(4))
-          .to({ x: 200}, 1000, createjs.Ease.getPowInOut(4));
+          .to(
+            { y: stage.canvas.height + 50 },
+            duration,
+            createjs.Ease.getPowIn(3)
+          );
+        createjs.Tween.get(part, { loop:true })
+          .to(
+            { x: Math.random()*stage.canvas.width },
+            duration,
+            createjs.Ease.linear()
+          );
       };
 
       var stage;
@@ -39,7 +47,13 @@
       window.init = function() {
         stage = new createjs.Stage("cjs-canvas");
 
-        spawn();
+        createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener("tick", stage);
+
+        var i;
+        for (i = 0; i < 300; i++) {
+          spawn();
+        }
       };
 
     })();
