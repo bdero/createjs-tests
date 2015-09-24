@@ -17,8 +17,35 @@
         return "#" + color.toString(16);
       };
 
+      var OUTER_SIZE = 20;
+      var SPREAD = 50;
+      var ROW_SPREAD = 30;
+
       var doubleHelix = function(length) {
         var helix = new createjs.Container();
+
+        var addCircle = function(row, direction) {
+          var circle = new createjs.Shape();
+
+          circle.graphics
+            .beginFill("lightblue")
+            .drawCircle(0, 0, OUTER_SIZE);
+
+          circle.x = SPREAD*direction;
+          circle.y = ROW_SPREAD*row;
+
+          helix.addChild(circle);
+        };
+
+        var rows = [];
+        var i, row;
+        for (i = 0; i < length; i++) {
+          row = {
+            left: addCircle(i, -1),
+            right: addCircle(i, 1)
+          };
+          rows.push(row);
+        }
 
         return helix;
       };
