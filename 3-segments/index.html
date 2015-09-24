@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>segments</title>
+</head>
+<body onload="init();">
+  <canvas id="cjs-canvas" width="500" height="300"></canvas>
+
+  <script src="https://code.createjs.com/easeljs-0.8.1.min.js" charset="utf-8"></script>
+  <script src="https://code.createjs.com/tweenjs-0.6.1.min.js" charset="utf-8"></script>
+
+  <script type="text/javascript">
+
+    (function() {
+
+      var c = function(color) {
+        return "#" + color.toString(16);
+      };
+
+      var stage;
+      window.init = function() {
+          stage = new createjs.Stage("cjs-canvas");
+
+          createjs.Ticker.setFPS(60);
+          createjs.Ticker.addEventListener("tick", stage);
+      };
+
+    })();
+
+  </script>
+</body>
+</html>
