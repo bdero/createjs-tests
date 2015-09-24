@@ -17,11 +17,20 @@
         return "#" + color.toString(16);
       };
 
+      var doubleHelix = function(length) {
+        var helix = new createjs.Container();
+
+        return helix;
+      };
+
+      var stage;
       window.init = function() {
           stage = new createjs.Stage("cjs-canvas");
 
           createjs.Ticker.setFPS(60);
           createjs.Ticker.addEventListener("tick", stage);
+
+          stage.addChild(doubleHelix(10));
       };
 
     })();
