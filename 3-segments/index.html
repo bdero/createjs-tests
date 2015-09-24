@@ -35,14 +35,14 @@
           segment.setTransform(stage.canvas.width/2, stage.canvas.height/2);
 
           segment.graphics
-            .beginStroke(c( 0xFFFFFF*Math.random() ))
             .setStrokeStyle(2*Math.random())
+            .beginStroke(c( 0xFFFFFF*Math.random() ))
             .moveTo(0,  -500)
             .lineTo(0, 500);
 
           seg = {
             segment: segment,
-            velocity: 180/length*i
+            velocity: (180/length*i)/2
           };
           console.log(seg.velocity);
           segments.push(seg);
@@ -61,7 +61,7 @@
 
           stage.addEventListener("tick", update);
 
-          genSegments(10);
+          genSegments(23);
       };
 
     })();
