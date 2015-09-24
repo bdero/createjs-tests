@@ -19,10 +19,11 @@
       };
 
       var update = function(event) {
-        alert("test");
+        time += event.delta/1000;
       };
 
       var stage;
+      var time = 0;
       window.init = function() {
           stage = new createjs.Stage("cjs-canvas");
 
