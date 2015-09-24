@@ -17,20 +17,29 @@
         return "#" + color.toString(16);
       };
 
-      window.init = function() {
-        var stage = new createjs.Stage("cjs-canvas");
-
-        var circle = new createjs.Shape();
-        circle.graphics.beginFill(c(0xFF0000)).drawCircle(0, 0, 50);
-        circle.x = circle.y = 100;
-        stage.addChild(circle);
+      /* Spawns a particle */
+      var spawn = function() {
+        var part = new createjs.Shape();
+        part.graphics
+          .beginFill(c( Math.floor(Math.random()*0xFFFFFF) ))
+          .drawCircle(0, 0, 50);
+        part.x = part.y = 100;
+        stage.addChild(part);
 
         createjs.Ticker.setFPS(60);
         createjs.Ticker.addEventListener("tick", stage);
 
-        createjs.Tween.get(circle, { loop:true })
+        createjs.Tween.get(part, { loop:true })
           .to({ x: 400}, 1000, createjs.Ease.getPowInOut(4))
           .to({ x: 200}, 1000, createjs.Ease.getPowInOut(4));
+      };
+
+      var stage;
+
+      window.init = function() {
+        stage = new createjs.Stage("cjs-canvas");
+
+        spawn();
       };
 
     })();
