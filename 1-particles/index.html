@@ -13,11 +13,15 @@
 
     (function() {
 
+      var c = function(color) {
+        return "#" + color.toString(16);
+      };
+
       window.init = function() {
         var stage = new createjs.Stage("cjs-canvas");
 
         var circle = new createjs.Shape();
-        circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+        circle.graphics.beginFill(c(0xFF0000)).drawCircle(0, 0, 50);
         circle.x = circle.y = 100;
         stage.addChild(circle);
 
