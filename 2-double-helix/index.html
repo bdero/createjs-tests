@@ -20,6 +20,7 @@
       var OUTER_SIZE = 20;
       var SPREAD = 50;
       var ROW_SPREAD = 30;
+      var ROW_OFFSET = 0.7;
 
       var doubleHelix = function(length) {
         var helix = new createjs.Container();
@@ -35,6 +36,7 @@
           circle.y = ROW_SPREAD*row;
 
           helix.addChild(circle);
+          return circle;
         };
 
         var rows = [];
@@ -48,6 +50,29 @@
           rows.push(row);
         }
 
+        var time = 0;
+        helix.addEventListener("tick", function(event) {
+          time += event.delta/1000;
+
+          var calcScale = function(scale) {
+            return (scale/2 + 1.5)/2;
+          }
+
+          var r, row, timeOffset, scale;
+          for (r in rows) {
+            row = rows[r];
+
+            timeOffset = time + r*ROW_OFFSET;
+
+            row.left.x = Math.cos(timeOffset)*SPREAD;
+            row.right.x = -row.left.x;
+
+            scale = Math.sin(timeOffset);
+            row.left.scaleX = row.left.scaleY = calcScale(scale);
+            row.right.scaleX = row.right.scaleY = calcScale(-scale);
+          }
+        });
+
         return helix;
       };
 
@@ -58,7 +83,7 @@
           createjs.Ticker.setFPS(60);
           createjs.Ticker.addEventListener("tick", stage);
 
-          var helix = doubleHelix(10);
+          var helix = doubleHelix(20);
           helix.setTransform(
             stage.canvas.width/2,
             stage.canvas.height/2,
