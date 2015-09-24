@@ -39,10 +39,11 @@
 
         var rows = [];
         var i, row;
+        var halflength = Math.floor(length/2);
         for (i = 0; i < length; i++) {
           row = {
-            left: addCircle(i, -1),
-            right: addCircle(i, 1)
+            left: addCircle(-halflength + i, -1),
+            right: addCircle(-halflength + i, 1)
           };
           rows.push(row);
         }
@@ -57,7 +58,16 @@
           createjs.Ticker.setFPS(60);
           createjs.Ticker.addEventListener("tick", stage);
 
-          stage.addChild(doubleHelix(10));
+          var helix = doubleHelix(10);
+          helix.setTransform(
+            stage.canvas.width/2,
+            stage.canvas.height/2,
+            1, 1,
+            45
+          );
+
+
+          stage.addChild(helix);
       };
 
     })();
