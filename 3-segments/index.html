@@ -20,10 +20,16 @@
 
       var update = function(event) {
         time += event.delta/1000;
+
+        var s, segment;
+        for (s in segments) {
+          segment = segments[s];
+          segment.segment.rotation = time*segment.velocity;
+        }
       };
 
       var genSegments = function(length) {
-        var i, segment;
+        var i, segment, seg;
         for (i = 0; i < length; i++) {
           segment = new createjs.Shape();
           segment.setTransform(stage.canvas.width/2, stage.canvas.height/2);
@@ -34,7 +40,12 @@
             .moveTo(0,  -500)
             .lineTo(0, 500);
 
-          segments.push(segment);
+          seg = {
+            segment: segment,
+            velocity: 180/length*i
+          };
+          console.log(seg.velocity);
+          segments.push(seg);
           stage.addChild(segment);
         }
       };
