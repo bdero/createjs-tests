@@ -71,6 +71,8 @@
             row.left.scaleX = row.left.scaleY = calcScale(scale);
             row.right.scaleX = row.right.scaleY = calcScale(-scale);
           }
+
+          helix.rotation = -time*10 + 45;
         });
 
         return helix;
