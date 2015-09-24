@@ -23,7 +23,20 @@
       };
 
       var genSegments = function(length) {
+        var i, segment;
+        for (i = 0; i < length; i++) {
+          segment = new createjs.Shape();
+          segment.setTransform(stage.canvas.width/2, stage.canvas.height/2);
 
+          segment.graphics
+            .beginStroke(c( 0xFFFFFF*Math.random() ))
+            .setStrokeStyle(2*Math.random())
+            .moveTo(0,  -500)
+            .lineTo(0, 500);
+
+          segments.push(segment);
+          stage.addChild(segment);
+        }
       };
 
       var stage;
