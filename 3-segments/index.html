@@ -22,8 +22,13 @@
         time += event.delta/1000;
       };
 
+      var genSegments = function(length) {
+
+      };
+
       var stage;
       var time = 0;
+      var segments = [];
       window.init = function() {
           stage = new createjs.Stage("cjs-canvas");
 
@@ -31,6 +36,8 @@
           createjs.Ticker.addEventListener("tick", stage);
 
           stage.addEventListener("tick", update);
+
+          genSegments(10);
       };
 
     })();
